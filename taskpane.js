@@ -5,11 +5,17 @@
    ================================================================ */
 
 // ── Initialise Office.js ─────────────────────────────────────────
+let insidePowerPoint = false;
+
 Office.onReady(info => {
   if (info.host === Office.HostType.PowerPoint) {
-    document.getElementById('convertBtn').disabled = false;
+    insidePowerPoint = true;
     loadSavedApiKey();
+  } else {
+    // Viewing in a browser — show notice, keep button clickable but guarded
+    document.getElementById('browserNotice').style.display = 'block';
   }
+  loadSavedApiKey();
 });
 
 // ── API-key helpers ──────────────────────────────────────────────
@@ -358,6 +364,10 @@ function _addLine(slide, el, ox, oy, ow, oh) {
 
 // ── Main orchestrator ─────────────────────────────────────────────
 async function convertToEditable() {
+  if (!insidePowerPoint) {
+    showStatus('⚠️ This add-in only works inside PowerPoint. Please load the manifest.xml into PowerPoint and open it from there.', 'error');
+    return;
+  }
   const btn = document.getElementById('convertBtn');
   btn.disabled = true;
   document.getElementById('status').style.display = 'none';
