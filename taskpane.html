@@ -144,8 +144,15 @@
       </ol>
     </div>
 
+    <!-- Not-in-PowerPoint notice (shown in browser, hidden inside PowerPoint) -->
+    <div class="status info" id="browserNotice" style="display:none;">
+      ⚠️ You are viewing this in a browser.<br>
+      To use it, load the <strong>manifest.xml</strong> into PowerPoint first.
+      The button below only works inside PowerPoint.
+    </div>
+
     <!-- Main action button -->
-    <button class="convert-btn" id="convertBtn" onclick="convertToEditable()" disabled>
+    <button class="convert-btn" id="convertBtn" onclick="convertToEditable()">
       ✨ Convert to Editable
     </button>
 
